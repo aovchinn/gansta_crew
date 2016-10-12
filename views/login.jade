@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Login
+  form(method="POST")
+    div.field
+      label Login
+      input(type="text" name="Login")
+    div.field
+      label Password
+      input(type="password" name="Password")
+    button(type="submit" name="login") Sign in
