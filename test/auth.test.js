@@ -2,18 +2,12 @@
 const chai = require("chai");
 const Promise = require("bluebird");
 const R = require("ramda");
-const crypto = require('crypto');
-const secret = "abcdefg";
 
 const AuthService = require("../js/auth/authService");
 
 const expect = chai.expect;
 
-function getHash(str) {
-    return crypto.createHmac("sha256", secret)
-        .update(str)
-        .digest("hex");
-}
+const getHash = require("../js/helpers").getHash;
 
 const users = [{
     id: 1,

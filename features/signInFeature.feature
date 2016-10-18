@@ -5,15 +5,15 @@ Feature: Sign in feature
 
     Scenario: Successful signing in
         Given I am on '/login' page
-        When I fill 'admin' in 'Login' field
-        And I fill 'admin' in 'Password' field
+        When I fill 'admin' in 'login' field
+        And I fill 'admin' in 'password' field
         And I press 'Sign in' button
         Then I should be redirected to '/profile'
 
     Scenario: Failed signing in
         Given I am on '/login' page
-        When I fill 'jack@example.com' in 'Login' field
-        And I fill '123456' in 'Password' field
+        When I fill 'jack@example.com' in 'login' field
+        And I fill '123456' in 'password' field
         And I press 'Sign in' button
         Then I should be redirected to '/login'
         And I should see alert 'The login or password is incorrect'

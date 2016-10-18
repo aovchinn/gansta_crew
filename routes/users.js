@@ -1,13 +1,12 @@
-var express = require('express');
-var router = express.Router();
+"use strict";
+const express = require('express');
+const router = express.Router();
+const authMiddleware = require('../js/auth/authMiddleware');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.use(authMiddleware);
 
-router.post("/auth", function(req, res, next) {
-
+router.get('/profile', function(req, res, next) {
+    res.render('profile');
 });
 
 module.exports = router;

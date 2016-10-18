@@ -1,14 +1,6 @@
 "use strict";
 const R = require("ramda");
-const crypto = require("crypto");
-
-const secret = "abcdefg";
-
-function getHash(str) {
-    return crypto.createHmac("sha256", secret)
-        .update(str)
-        .digest("hex");
-}
+const getHash = require("../helpers").getHash;
 
 class AuthService {
     constructor(dbService) {

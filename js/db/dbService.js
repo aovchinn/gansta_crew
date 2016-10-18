@@ -28,5 +28,16 @@ class DbService {
                 return R.compose( R.assoc("id", id), R.omit("_id"))(user)
             });
     }
+    findByLogin(login) {
+        const db = pmongo(`${baseUrl}/${this.dbName}`, [collection]);
+        return db[collection].findOne({ login })
+            .then(user => {
+                if (!user) {
+                    throw new Error("User not found");
+                }
+                const id = user._id.toString();
+                return R.compose( R.assoc("id", id), R.omit("_id"))(user)
+            });
+    }
 }
 module.exports = DbService;

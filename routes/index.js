@@ -1,42 +1,36 @@
 "use strict";
 const express = require('express');
 const router = express.Router();
-const crypto = require("crypto");
 
-// const AuthService = require("../js/auth/authService");
-//
-// const secret = "abcdefg";
-// function getHash(str) {
-//     return crypto.createHmac("sha256", secret)
-//         .update(str)
-//         .digest("hex");
-// }
+function getRouter(authService) {
+    /* GET home page. */
+    router.get('/', function(req, res, next) {
+        res.render('index', { title: 'Express' });
+    });
 
-const authService = new AuthService({
-    findByName: function(name) {
-        if (name === "admin") {
-            return {
-                id: 1,
-                login: "admin",
-                name: "someName",
-                surname: "surname",
-                password: getHash("admin")
-            }
-        }
-    }
-});
+    router.get('/login', function(req, res, next) {
+        // const errorMessages = req.flash('error');
+        res.render('login');
+    });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+    router.post('/login', function(req, res, next) {
+        const login = req.body.login;
+        const password = req.body.password;
+        authService.getUser(login, password)
+            .then(user => {
+                console.log(user);
+                res.cookie('signedIn', true, { signed: true });
+                res.redirect('/users/profile');
+            })
+            .catch(err => {
+                console.error(err);
+                req.flash('error', 'The login or password is incorrect')
+                res.redirect('/login');
+            });
+    });
 
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
+    return router;
+}
 
-router.post('/login', function(req, res, next) {
-    authService
-});
 
-module.exports = router;
+module.exports = getRouter;

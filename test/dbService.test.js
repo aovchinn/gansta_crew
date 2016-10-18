@@ -9,10 +9,16 @@ const DbService = require("../js/db/dbService");
 
 describe("dbService test", function() {
     let dbService;
-    const dbName = "test-db"
+    const dbName = "test-db";
+    const defaultUser = {
+        login: "default",
+        password: "pass",
+        name: "vasiliy"
+    };
 
     beforeEach(function() {
         dbService = new DbService(dbName);
+        return dbService.insertUser(defaultUser);
     });
 
     afterEach(function() {
@@ -48,11 +54,10 @@ describe("dbService test", function() {
             });
     });
 
-    it("should be able to find a user by name", function() {
-        const user = {
-            name: "someName",
-            login: "vasya",
-            password: "poh"
-        };
+    it("should be able to find a user by login", function() {
+        return dbService.findByLogin("default")
+            .then(user => {
+                expect(R.dissoc("id", user)).to.eql(defaultUser);
+            });
     });
 });
