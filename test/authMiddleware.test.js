@@ -28,7 +28,8 @@ describe("Auth middleware test", function() {
             }
         };
         const res = {
-            redirect: sinon.spy()
+            redirect: sinon.spy(),
+            locals: {}
         };
         const next = sinon.spy();
         authMiddleware(req, res, next);
