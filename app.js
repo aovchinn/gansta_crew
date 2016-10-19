@@ -31,6 +31,10 @@ app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    res.locals.signedIn = Boolean(req.signedCookies.signedIn);
+    next();
+});
 app.use('/', routes(authService));
 app.use('/users', users);
 

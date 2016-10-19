@@ -11,7 +11,9 @@ var World = function World() {
         return this.browser.fill(label, value);
     };
 
-    this.click = (buttonLabel) => this.browser.pressButton(buttonLabel);
+    this.clickButton = (buttonLabel) => this.browser.pressButton(buttonLabel);
+
+    this.clickLink = (linkText) => this.browser.clickLink(linkText);
 
 };
 

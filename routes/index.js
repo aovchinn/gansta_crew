@@ -9,8 +9,12 @@ function getRouter(authService) {
     });
 
     router.get('/login', function(req, res, next) {
-        // const errorMessages = req.flash('error');
         res.render('login');
+    });
+
+    router.get('/logout', function(req, res, next) {
+        res.clearCookie('signedIn');
+        res.redirect('/');
     });
 
     router.post('/login', function(req, res, next) {
@@ -18,7 +22,6 @@ function getRouter(authService) {
         const password = req.body.password;
         authService.getUser(login, password)
             .then(user => {
-                console.log(user);
                 res.cookie('signedIn', true, { signed: true });
                 res.redirect('/users/profile');
             })
