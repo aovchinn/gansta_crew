@@ -8,7 +8,7 @@ Feature: Sign in feature
         When I fill 'admin' in 'login' field
         And I fill 'admin' in 'password' field
         And I press 'Sign in' button
-        Then I should be redirected to '/profile'
+        Then I should be redirected to '/users/profile'
 
     Scenario: Failed signing in
         Given I am on '/login' page
