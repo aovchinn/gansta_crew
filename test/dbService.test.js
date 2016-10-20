@@ -29,7 +29,7 @@ describe("dbService test", function() {
         const user = {
             name: "someName",
             login: "vasya",
-            password: "poh"
+            password: "some"
         };
         return dbService.insertUser(user)
             .then(id => {
@@ -41,7 +41,7 @@ describe("dbService test", function() {
         const user = {
             name: "someName",
             login: "vasya",
-            password: "poh"
+            password: "some"
         };
         let _id;
         return dbService.insertUser(user)

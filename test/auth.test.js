@@ -20,7 +20,7 @@ const users = [{
     login: "vasya",
     name: "someName",
     surname: "surname",
-    password: getHash("loh")
+    password: getHash("some")
 }];
 
 const dbService = {
